@@ -1,0 +1,105 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fdfaf6;
+    color: #5c5552;
+    padding-top: 56px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+    color: #8c6b5d;
+    font-weight: 400;
+}
+
+a {
+    color: #a07e70;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #795548;
+    text-decoration: underline;
+}
+
+#mainNav {
+    background-color: #FAF0E6;
+    border-bottom: 1px solid #EAE0D5;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    color: #5D4037;
+}
+
+.card {
+    border: 1px solid #EAE0D5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: #fff;
+}
+
+.card-title {
+    color: #8c6b5d;
+}
+
+.btn-primary {
+    background-color: #a07e70;
+    border-color: #a07e70;
+    color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus{
+    background-color: #8c6b5d;
+    border-color: #8c6b5d;
+    color: #fff;
+}
+
+.btn-primary:active{
+    background-color: #5D4037 !important;
+}
+
+#price-badge{
+    background-color: #8c6b5d !important;
+}
+.container {
+    max-width: 1140px;
+}
+
+.navbar-brand{
+    color: #5D4037;
+}
+
+.navbar-brand:hover{
+    color: #3e2b26;
+}
+
+.description-extrait {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+#desc-div{
+    background-color: #fff !important;
+    border: 2px solid #8c6b5d !important;
+}
+
+.dropdown-menu .dropdown-item.active-dropdown-item,
+.dropdown-menu .dropdown-item.active-dropdown-item:hover,
+.dropdown-menu .dropdown-item.active-dropdown-item:focus {
+    color: #ffffff;
+    background-color: #a07e70;
+    font-weight: bold;
+}
+
+.dropdown-menu .dropdown-item:active{
+    background-color: #5D4037 !important;
+}
+
+.card-text.fs-5.fw-bold.mt-auto.text-end{
+    color: #5D4037;
+}
+
+.card-img-top{
+    height: 250px;
+    background-color: #f8f9fa;
+}

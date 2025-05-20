@@ -59,5 +59,25 @@ class UtilisateurDAO
         }
     }
 
+    public function getUtilisateur($login)
+    {
+        $query = "SELECT * FROM utilisateurs WHERE username=:login OR email=:login";
+
+        try {
+            $stmt = $this->_bd->prepare($query);
+            $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch();
+
+            if ($data) {
+                return new Utilisateur($data);
+            }
+            else return null;
+        }
+        catch (PDOException $e) {
+            print "Erreur DB (getUtilisateur): " . $e->getMessage();
+            return null;
+        }
+    }
 
 }

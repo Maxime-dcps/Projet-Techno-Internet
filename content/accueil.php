@@ -11,7 +11,7 @@ if (isset($cnx))
 
 <div class="text-center mb-5 pt-4 pb-3 bg-light rounded-3 shadow-sm" id="desc-div">
     <h1 class="display-4">Notre Collection d'Oeuvres d'Art</h1>
-    <p class="lead text-muted">Découvrez une sélection exquise d'œuvres d'artistes talentueux.</p>
+    <p class="lead text-muted">Découvrez une sélection d'oeuvres d'artistes talentueux.</p>
 </div>
 
 <div class="container">

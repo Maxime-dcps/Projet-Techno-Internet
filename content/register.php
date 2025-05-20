@@ -3,13 +3,12 @@
 $erreurs_enregistrement = [];
 $username_val = '';
 $email_val = '';
-$message_succes_enregistrement = '';
 
 if(isset($cnx)) $utilisateurDAO = new UtilisateurDAO($cnx);
 
 if (isset($_POST['action_register'])) {
 
-    $username_val = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $username_val = isset($_POST['username']) ? $_POST['username'] : '';
     $email_val = isset($_POST['email']) ? trim($_POST['email']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $password_confirm = isset($_POST['password_confirm']) ? $_POST['password_confirm'] : '';
@@ -69,7 +68,7 @@ if (isset($_POST['action_register'])) {
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm">
                 <div class="card-body p-4 p-md-5">
-                    <h2 class="card-title text-center mb-4 fw-bold" style="color: #5D4037;">Créer un compte</h2>
+                    <h2 class="card-title text-center mb-4 fw-bold">Créer un compte</h2>
 
                     <?php if (!empty($message_succes_enregistrement)): ?>
                         <div class="alert alert-success" role="alert">
@@ -135,7 +134,7 @@ if (isset($_POST['action_register'])) {
                     </form>
 
                     <p class="text-center mt-4 text-muted">
-                        Déjà un compte ? <a href="./index_.php?page=connexion.php" class="fw-bold text-decoration-none" style="color: #a07e70;">Connectez-vous</a>
+                        Déjà un compte ? <a href="./index_.php?page=login.php" class="fw-bold text-decoration-none" style="color: #a07e70;">Connectez-vous</a>
                     </p>
                 </div>
             </div>

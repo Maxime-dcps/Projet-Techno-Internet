@@ -101,5 +101,34 @@ a:hover {
 
 .card-img-top{
     height: 250px;
+    object-fit: cover;
+}
+
+#detail-image{
+    height: 500px;
+    object-fit: contain;
     background-color: #f8f9fa;
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-select:focus {
+    border-color: #8c6b5d;
+    color: #5c5552;
+    box-shadow: none;
+    outline: none;
+}
+
+button:disabled,
+.btn:disabled,
+.btn.disabled {
+    background-color: #e0d6d1;
+    border-color: #d3c2bb;
+    color: #a07e70;
+    opacity: 1;
+
+}
+
+.button-wrapper-disabled{
+    cursor: not-allowed;
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Oeuvre
+class DetailOeuvre
 {
     private $_attributs = array();
 

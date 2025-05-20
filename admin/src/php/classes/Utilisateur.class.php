@@ -1,6 +1,6 @@
 <?php
 
-class Oeuvre
+class Utilisateur
 {
     private $_attributs = array();
 

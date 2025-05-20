@@ -21,6 +21,18 @@
                         <a class="dropdown-item" href="#">Dessin</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-secondary <?php //if ($currentPage == 'connexion.php') echo 'active-main-link'; ?>"
+                       href="./index_.php?page=connexion.php">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-primary btn-sm <?php //if ($currentPage == 'enregistrement.php') echo 'active'; ?>"
+                       href="./index_.php?page=register.php" role="button">
+                        <i class="bi bi-person-plus-fill me-1"></i>S'inscrire
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

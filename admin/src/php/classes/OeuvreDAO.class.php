@@ -5,7 +5,6 @@ class OeuvreDAO
 {
 
     private $_bd;
-    private $_array = array();
 
     public function __construct($cnx)
     {

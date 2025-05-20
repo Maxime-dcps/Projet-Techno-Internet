@@ -22,7 +22,7 @@ if (isset($cnx))
                     <div class="card h-100 shadow-sm">
                         <a href="./index_.php?page=detail_oeuvre.php&id=<?= $oeuvre->id_oeuvre ?>">
                             <?php if (!empty(trim($oeuvre->image_url))): ?>
-                                <img src="./admin/assets/<?= $oeuvre->image_url ?>" class="card-img-top" alt="<?= $oeuvre->titre ?>" style="height: 250px; object-fit: cover;">
+                                <img src="./admin/assets/<?= $oeuvre->image_url ?>" class="card-img-top" alt="<?= $oeuvre->titre ?>">
                             <?php else: ?>
                                 <div class="d-flex align-items-center justify-content-center card-img-top">
                                     <span class="text-muted">Image non disponible</span>

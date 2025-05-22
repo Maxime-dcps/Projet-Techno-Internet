@@ -1,5 +1,7 @@
 <?php
 
+$previous_page = isset($_GET['previous_page']) ? $_GET['previous_page'] : '';
+
 $username_val = "";
 $erreurs_enregistrement = [];
 
@@ -37,7 +39,11 @@ if(isset($_POST['login_submit']))
                 }
                 else header('Location: ./index_.php?page=accueil.php');
                 */
-                header('Location: ./index_.php?page=accueil.php');
+
+                $page = isset($_POST["previous_page"]) ? basename($_POST['previous_page']) : "accueil.php";
+
+                header('Location: ./index_.php?page=' . $page);
+
                 exit;
             }
             else
@@ -59,6 +65,7 @@ if(isset($_POST['login_submit']))
             <div class="card shadow-sm">
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center mb-4 fw-bold">Se connecter</h2>
+                    <hr>
 
                     <?php if (!empty($erreurs_enregistrement["connexion"])): ?>
                         <div class="alert alert-danger" role="alert">
@@ -91,6 +98,8 @@ if(isset($_POST['login_submit']))
                                 </div>
                             </div>
                         </div>
+
+                        <input type="hidden" name="previous_page" value="<?= htmlspecialchars($previous_page) ?>">
 
                         <div class="d-grid">
                             <button type="submit" name="login_submit" class="btn btn-primary btn-lg">Se connecter</button>

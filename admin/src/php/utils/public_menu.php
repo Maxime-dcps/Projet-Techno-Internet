@@ -42,6 +42,13 @@
                     </li>
                 <?php else:?>
                     <li class="nav-item ms-lg-2">
+                        <a class="nav-link"
+                           href="./index_.php?page=create_oeuvre.php">
+                            Nouvelle annonce
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
                         <a class="btn btn-primary btn-sm"
                            href="./index_.php?page=disconnect.php" role="button">
                            Déconnexion

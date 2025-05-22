@@ -52,9 +52,8 @@ if (isset($_POST['action_register'])) {
         $idNewUser = $utilisateurDAO->enregistrerUtilisateur($username_val, $email_val, $password_hash);
 
         if ($idNewUser > 0) {
-            $message_succes_enregistrement = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
-            $username_val = '';
-            $email_val = '';
+            header('location: ./index_.php?page=login.php');
+            exit;
         } else {
             $erreurs_enregistrement["register"] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
         }
@@ -69,12 +68,7 @@ if (isset($_POST['action_register'])) {
             <div class="card shadow-sm">
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center mb-4 fw-bold">Créer un compte</h2>
-
-                    <?php if (!empty($message_succes_enregistrement)): ?>
-                        <div class="alert alert-success" role="alert">
-                            <?= $message_succes_enregistrement ?>
-                        </div>
-                    <?php endif; ?>
+                    <hr>
 
                     <?php if (!empty($erreurs_enregistrement["register"])): ?>
                         <div class="alert alert-danger" role="alert">
@@ -134,7 +128,7 @@ if (isset($_POST['action_register'])) {
                     </form>
 
                     <p class="text-center mt-4 text-muted">
-                        Déjà un compte ? <a href="./index_.php?page=login.php" class="fw-bold text-decoration-none" style="color: #a07e70;">Connectez-vous</a>
+                        Déjà un compte ? <a href="./index_.php?page=login.php" class="fw-bold text-decoration-none">Connectez-vous</a>
                     </p>
                 </div>
             </div>

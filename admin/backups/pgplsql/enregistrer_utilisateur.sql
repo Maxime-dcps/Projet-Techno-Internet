@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION enregistrer_utilisateur(p_username VARCHAR(50), p_email VARCHAR(255), p_hash VARCHAR(255))
+CREATE OR REPLACE FUNCTION enregistrer_utilisateur(p_username VARCHAR, p_email VARCHAR, p_hash VARCHAR)
 RETURNS INTEGER AS 
 $$
 DECLARE

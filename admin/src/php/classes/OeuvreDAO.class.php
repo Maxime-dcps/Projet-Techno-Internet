@@ -24,11 +24,11 @@ class OeuvreDAO
             $order_direction = 'ASC';
         }
 
-        //$query .= " WHERE status_oeuvre = 'disponible'";
+        $query .= " WHERE statut_oeuvre = 'disponible'";
 
         if (!is_null($filtre_type_id)) {
-            $query .= " WHERE id_type_oeuvre = :type_id";
-            //$query .= " AND id_type_oeuvre = :type_id";
+            //$query .= " WHERE id_type_oeuvre = :type_id";
+            $query .= " AND id_type_oeuvre = :type_id";
         }
 
         $query .= " ORDER BY $order_by $order_direction";
@@ -82,6 +82,19 @@ class OeuvreDAO
 
         } catch (PDOException $e) {
             print "Erreur DB (createOeuvre): " . $e->getMessage();
+            return -1;
+        }
+    }
+
+    public function supprimerOeuvre(int $id_oeuvre){
+        $query = "SELECT soft_delete_oeuvre(:id_oeuvre)";
+        try {
+            $stmt = $this->_bd->prepare($query);
+            $stmt->bindValue(':id_oeuvre', $id_oeuvre);
+            $stmt->execute();
+            return $stmt->fetchColumn(); // 1=succès, 0=non trouvée, -1=erreur DB
+        } catch (PDOException $e) {
+            print "Erreur DB (supprimerOeuvre): " . $e->getMessage();
             return -1;
         }
     }

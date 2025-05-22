@@ -58,6 +58,12 @@ a:hover {
     background-color: #5D4037 !important;
 }
 
+.btn-secondary {
+    background-color: #FAF0E6;
+    border-color: #a07e70;
+    color: #5D4037;
+}
+
 #price-badge{
     background-color: #8c6b5d !important;
 }
@@ -142,4 +148,9 @@ hr {
     margin-top: 8px;
     margin-bottom: 16px;
     color: #5D4037;
+}
+
+.position-sticky{
+    top: 80px;
+    z-index: 1;
 }

@@ -21,50 +21,52 @@ if (isset($cnx)) {
 <div class="container">
     <div class="row">
         <!-- Colonne filtres -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-light py-3">
-                    <h5 class="mb-0">Filtrer et Trier</h5>
-                </div>
-                <div class="card-body p-3">
-                    <form method="GET" action="./index_.php" class="row g-3" id="filter-form">
-                        <input type="hidden" name="page" value="accueil.php">
+        <div class="col-md-3 mb-4 ">
+            <div class="position-sticky" >
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light py-3">
+                        <h5 class="mb-0">Filtrer et Trier</h5>
+                    </div>
+                    <div class="card-body p-3">
+                        <form method="GET" action="./index_.php" class="row g-3" id="filter-form">
+                            <input type="hidden" name="page" value="accueil.php">
 
-                        <div class="col-12">
-                            <label for="filtre_type" class="form-label fw-semibold">Type d'oeuvre :</label>
-                            <select name="filtre_type" id="filtre_type" class="form-select form-select-sm">
-                                <option value="">Tous les types</option>
-                                <?php if (!empty($types)): ?>
-                                    <?php foreach ($types as $type): ?>
-                                        <option value="<?= $type->id_type_oeuvre ?>" <?= ($filtre_type_id == $type->id_type_oeuvre) ? 'selected' : '' ?>>
-                                            <?= $type->nom_type ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-                        </div>
+                            <div class="col-12">
+                                <label for="filtre_type" class="form-label fw-semibold">Type d'oeuvre :</label>
+                                <select name="filtre_type" id="filtre_type" class="form-select form-select-sm">
+                                    <option value="">Tous les types</option>
+                                    <?php if (!empty($types)): ?>
+                                        <?php foreach ($types as $type): ?>
+                                            <option value="<?= $type->id_type_oeuvre ?>" <?= ($filtre_type_id == $type->id_type_oeuvre) ? 'selected' : '' ?>>
+                                                <?= $type->nom_type ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                            </div>
 
-                        <div class="col-12">
-                            <label for="order_by" class="form-label fw-semibold">Trier par :</label>
-                            <select name="order_by" id="order_by" class="form-select form-select-sm">
-                                <option value="id_oeuvre" <?= ($order_by == 'id_oeuvre') ? 'selected' : '' ?>>Par défaut</option>
-                                <option value="date_publication" <?= ($order_by == 'date_publication') ? 'selected' : '' ?>>Date</option>
-                                <option value="prix" <?= ($order_by == 'prix') ? 'selected' : '' ?>>Prix</option>
-                            </select>
-                        </div>
+                            <div class="col-12">
+                                <label for="order_by" class="form-label fw-semibold">Trier par :</label>
+                                <select name="order_by" id="order_by" class="form-select form-select-sm">
+                                    <option value="id_oeuvre" <?= ($order_by == 'id_oeuvre') ? 'selected' : '' ?>>Par défaut</option>
+                                    <option value="date_publication" <?= ($order_by == 'date_publication') ? 'selected' : '' ?>>Date</option>
+                                    <option value="prix" <?= ($order_by == 'prix') ? 'selected' : '' ?>>Prix</option>
+                                </select>
+                            </div>
 
-                        <div class="col-12">
-                            <label for="tri_ordre" class="form-label fw-semibold">Ordre :</label>
-                            <select name="tri_ordre" id="tri_ordre" class="form-select form-select-sm">
-                                <option value="ASC" <?= ($order_direction == 'ASC') ? 'selected' : '' ?>>Croissant</option>
-                                <option value="DESC" <?= ($order_direction == 'DESC') ? 'selected' : '' ?>>Décroissant</option>
-                            </select>
-                        </div>
+                            <div class="col-12">
+                                <label for="tri_ordre" class="form-label fw-semibold">Ordre :</label>
+                                <select name="tri_ordre" id="tri_ordre" class="form-select form-select-sm">
+                                    <option value="ASC" <?= ($order_direction == 'ASC') ? 'selected' : '' ?>>Croissant</option>
+                                    <option value="DESC" <?= ($order_direction == 'DESC') ? 'selected' : '' ?>>Décroissant</option>
+                                </select>
+                            </div>
 
-                        <div class="col-12 d-grid">
-                            <button type="submit" class="btn btn-primary btn-sm">Appliquer</button>
-                        </div>
-                    </form>
+                            <div class="col-12 d-grid">
+                                <button type="submit" class="btn btn-primary btn-sm">Appliquer</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

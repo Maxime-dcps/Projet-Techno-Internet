@@ -1,8 +1,11 @@
 <?php
 
+$ableToAlter = false;
+
 if (isset($cnx))
 {
     $detailOeuvreDAO = new DetailOeuvreDAO($cnx);
+    $oeuvreDAO = new OeuvreDAO($cnx);
 }
 
 if (isset($_GET['id'])) {
@@ -13,13 +16,46 @@ if (isset($_GET['id'])) {
 
 $oeuvre = $detailOeuvreDAO->getDetailOeuvresById($id_oeuvre);
 
-if (!$oeuvre) header('Location: ./index_.php?page=page_404.php');
+if (!$oeuvre)
+{
+    header('Location: ./index_.php?page=page_404.php');
+    exit;
+}
+
+if(isset($_SESSION["utilisateur_id"]))
+{
+    $ableToAlter = ($_SESSION["utilisateur_id"] == $oeuvre->id_utilisateur || $_SESSION["utilisateur_role"] == "administrateur");
+
+    if($ableToAlter && isset($_POST['btn_supprimer']) && isset($_POST['oeuvre_id_to_delete']))
+    {
+        $id_to_delete = (int)$_POST['oeuvre_id_to_delete'];
+
+        $resultat_suppression = $oeuvreDAO->supprimerOeuvre($id_to_delete);
+
+        if($resultat_suppression === 1)
+        {
+            header('Location: ./index_.php?page=accueil.php');
+            exit;
+        }
+        else{
+            $error = "Impossible de supprimer cette annonce, veuillez ressayer plus tard.";
+        }
+    }
+}
 
 ?>
 
 <div class="container mt-4 mb-5">
     <div class="row g-4">
         <div class="col-lg-7">
+
+            <?php if (!empty($erreur)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">Erreur lors de la suppression</h5>
+                    <p><?= $erreur ?></p>
+                </div>
+            <?php endif; ?>
+
             <div class="card border-0 shadow-sm rounded overflow-hidden">
                 <?php if (!empty(trim($oeuvre->image_url))): ?>
                     <img src="./admin/assets/<?= $oeuvre->image_url ?>" class="d-block w-100" alt="<?= $oeuvre->titre ?>" id="detail-image">
@@ -88,6 +124,21 @@ if (!$oeuvre) header('Location: ./index_.php?page=page_404.php');
                             Retour au Catalogue
                         </a>
                     </div>
+
+                    <?php if($ableToAlter): ?>
+                        <div class="mt-3 d-flex gap-2 justify-content-around">
+
+                            <a href="./index_.php?page=modifier_oeuvre.php&id=<?= $oeuvre->id_oeuvre ?>" class="btn btn-secondary">
+                                Modifier l'annonce
+                            </a>
+
+                            <form action="" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette oeuvre ?');">
+                                <input type="hidden" name="oeuvre_id_to_delete" value="<?= $oeuvre->id_oeuvre?>">
+                                <button type="submit" class="btn btn-primary" name="btn_supprimer">Supprimer l'annonce</button>
+                            </form>
+                        </div>
+
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

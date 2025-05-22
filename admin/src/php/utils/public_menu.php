@@ -18,11 +18,11 @@
                         Catégories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Peinture</a></li>
-                        <li><a class="dropdown-item" href="#">Sculpture</a></li>
-                        <li><a class="dropdown-item" href="#">Photographie</a></li>
-                        <li><a class="dropdown-item" href="#">Art numérique</a></li>
-                        <li><a class="dropdown-item" href="#">Dessin</a></li>
+                        <li><a class="dropdown-item" href="./index_.php?page=accueil.php&filtre_type=1">Peinture</a></li>
+                        <li><a class="dropdown-item" href="./index_.php?page=accueil.php&filtre_type=2">Sculpture</a></li>
+                        <li><a class="dropdown-item" href="./index_.php?page=accueil.php&filtre_type=3">Photographie</a></li>
+                        <li><a class="dropdown-item" href="./index_.php?page=accueil.php&filtre_type=4">Art numérique</a></li>
+                        <li><a class="dropdown-item" href="./index_.php?page=accueil.php&filtre_type=5">Dessin</a></li>
                     </ul>
                 </li>
 

@@ -48,14 +48,15 @@ a:hover {
 }
 
 .btn-primary:hover,
-.btn-primary:focus{
+.btn-primary:focus {
     background-color: #8c6b5d;
     border-color: #8c6b5d;
     color: #fff;
 }
 
-.btn-primary:active{
+.btn-primary:active {
     background-color: #5D4037 !important;
+    border-color: #5D4037 !important;
 }
 
 .btn-secondary {
@@ -63,6 +64,20 @@ a:hover {
     border-color: #a07e70;
     color: #5D4037;
 }
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #f0e0d0;
+    border-color: #8c6b5d;
+    color: #5D4037;
+}
+
+.btn-secondary:active {
+    background-color: #e0cfc0 !important;
+    border-color: #5D4037 !important;
+    color: #5D4037 !important;
+}
+
 
 #price-badge{
     background-color: #8c6b5d !important;
@@ -140,7 +155,7 @@ button:disabled,
 }
 
 textarea{
-    resize: none;
+    height: 150px !important;
 }
 
 hr {

@@ -4,7 +4,6 @@ $ableToAlter = false;
 
 if (isset($cnx))
 {
-    $detailOeuvreDAO = new DetailOeuvreDAO($cnx);
     $oeuvreDAO = new OeuvreDAO($cnx);
 }
 
@@ -14,7 +13,7 @@ if (isset($_GET['id'])) {
     header('Location: ./index_.php?page=page_404.php');
 }
 
-$oeuvre = $detailOeuvreDAO->getDetailOeuvresById($id_oeuvre);
+$oeuvre = $oeuvreDAO->getOeuvreById($id_oeuvre);
 
 if (!$oeuvre)
 {
@@ -128,7 +127,7 @@ if(isset($_SESSION["utilisateur_id"]))
                     <?php if($ableToAlter): ?>
                         <div class="mt-3 d-flex gap-2 justify-content-around">
 
-                            <a href="./index_.php?page=modifier_oeuvre.php&id=<?= $oeuvre->id_oeuvre ?>" class="btn btn-secondary">
+                            <a href="./index_.php?page=update_oeuvre.php&id=<?= $oeuvre->id_oeuvre ?>" class="btn btn-secondary">
                                 Modifier l'annonce
                             </a>
 

@@ -99,5 +99,91 @@ class OeuvreDAO
         }
     }
 
+    public function getOeuvreById($id_oeuvre)
+    {
+        $query = "SELECT * FROM vue_oeuvres_details WHERE id_oeuvre=:id_oeuvre";
 
+        try {
+            $resultset = $this->_bd->prepare($query);
+            $resultset->bindValue(":id_oeuvre",$id_oeuvre);
+            $resultset->execute();
+            $data = $resultset->fetch();
+            if($data){
+                return new Oeuvre($data);
+            } else {
+                return null;
+            }
+
+        }catch(PDOException $e) {
+            print "Echec ".$e->getMessage();
+            return null;
+        }
+    }
+
+    public function updateOeuvre(
+        int $id_oeuvre,
+        string $titre,
+        string $description,
+        string $artiste,
+        int $id_type_oeuvre,
+        int $id_utilisateur,
+        int $annee_creation,
+        string $dimensions,
+        float $prix,
+        string $chemin_image
+    ): bool {
+
+        $query = "SELECT update_oeuvre(
+                        :id_oeuvre,
+                        :titre,
+                        :description,
+                        :artiste,
+                        :id_type_oeuvre,
+                        :id_utilisateur,
+                        :annee_creation,
+                        :dimensions,
+                        :prix,
+                        :chemin_image
+                    )";
+
+        try {
+            $this->_bd->beginTransaction();
+            $stmt = $this->_bd->prepare($query);
+
+            $stmt->bindValue(':id_oeuvre', $id_oeuvre);
+            $stmt->bindValue(':titre', $titre);
+            $stmt->bindValue(':description', $description);
+            $stmt->bindValue(':artiste', $artiste);
+            $stmt->bindValue(':id_type_oeuvre', $id_type_oeuvre);
+            $stmt->bindValue(':id_utilisateur', $id_utilisateur);
+
+            // Gérer les valeurs potentiellement nulles pour annee_creation, dimensions, prix
+            $stmt->bindValue(':annee_creation', $annee_creation, $annee_creation === null ? PDO::PARAM_NULL : PDO::PARAM_INT);
+            $stmt->bindValue(':dimensions', $dimensions, $dimensions === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+            if ($prix === null) {
+                $stmt->bindValue(':prix', null, PDO::PARAM_NULL);
+            } else {
+                $stmt->bindValue(':prix', $prix);
+            }
+
+            $stmt->bindValue(':chemin_image', $chemin_image);
+
+        $stmt->execute();
+        $retour_db = $stmt->fetchColumn(0);
+
+        if ($retour_db === 1) {
+            $this->_bd->commit();
+            return true;
+        } else {
+            $this->_bd->rollBack(); // Annule la transaction
+            return false;
+        }
+
+    } catch (PDOException $e) {
+        $this->_bd->rollBack();
+        print("Erreur PDO lors de la mise à jour de l'oeuvre (ID: {$id_oeuvre}): " . $e->getMessage());
+
+        return false;
+    }
+}
 }

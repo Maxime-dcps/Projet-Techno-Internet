@@ -11,7 +11,7 @@ class OeuvreDAO
         $this->_bd = $cnx;
     }
 
-    public function getAllOeuvres($filtre_type_id = null, $order_by = 'id_oeuvre', $order_direction = 'ASC', $asArray = false)
+    public function getAllOeuvres($filtre_type_id = null, $order_by = 'id_oeuvre', $order_direction = 'ASC', string $search_term = null, $asArray = false)
     {
         $query = "SELECT * FROM oeuvres";
         $colonnes_autorisees = ['id_oeuvre', 'date_publication', 'prix'];
@@ -24,18 +24,31 @@ class OeuvreDAO
             $order_direction = 'ASC';
         }
 
-        $query .= " WHERE statut_oeuvre = 'disponible'";
+        $whereClauses = ["statut_oeuvre = 'disponible'"];
 
         if (!is_null($filtre_type_id)) {
-            //$query .= " WHERE id_type_oeuvre = :type_id";
-            $query .= " AND id_type_oeuvre = :type_id";
+            $whereClauses[] = "id_type_oeuvre = :type_id";
+        }
+
+        if (!empty($search_term)) {
+            $whereClauses[] = "(UPPER(titre) LIKE UPPER(:search_term) OR UPPER(artiste) LIKE UPPER(:search_term) OR UPPER(description) LIKE UPPER(:search_term))";
+        }
+
+        if (!empty($whereClauses)) {
+            $query .= " WHERE " . implode(" AND ", $whereClauses);
         }
 
         $query .= " ORDER BY $order_by $order_direction";
 
         try {
             $stmt = $this->_bd->prepare($query);
+
             if (!is_null($filtre_type_id)) $stmt->bindValue(":type_id", $filtre_type_id, PDO::PARAM_INT);
+
+            if (!empty($search_term)) {
+                $stmt->bindValue(":search_term", "%" . $search_term . "%", PDO::PARAM_STR);
+            }
+
             $stmt->execute();
 
             if ($asArray) {

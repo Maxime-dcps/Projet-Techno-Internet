@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include('./admin/src/php/utils/header.php');
 include('./admin/src/php/utils/all_includes.php');
@@ -21,11 +22,11 @@ include('./admin/src/php/utils/all_includes.php');
     <div id="page" class="container">
         <header class="img_header"></header>
         <section>
-            <nav>
-                <?php
-                if(file_exists('admin/src/php/utils/public_menu.php'))
-                    include('admin/src/php/utils/public_menu.php')?>
-            </nav>
+
+            <?php
+            if(file_exists('admin/src/php/utils/public_menu.php'))
+                include('admin/src/php/utils/public_menu.php')?>
+
         </section>
         <section id="contenu">
             <div class="container mt-4">
@@ -71,3 +72,6 @@ include('./admin/src/php/utils/all_includes.php');
     <script src="./admin/assets/js/modal.js"></script>
 </body>
 </html>
+<?php
+ob_end_flush();
+?>

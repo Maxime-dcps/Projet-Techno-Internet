@@ -11,11 +11,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
 }
 
-a {
+a, a.nav-link {
     color: #a07e70;
     text-decoration: none;
 }
-
+a.nav-link:hover{
+    text-decoration: none;
+}
 a:hover {
     color: #795548;
     text-decoration: underline;
@@ -169,3 +171,48 @@ hr {
     top: 80px;
     z-index: 1;
 }
+
+#logout-btn{
+    border: 0px solid #a07e70;
+}
+
+#login-link{
+    border-radius: 100%;
+}
+
+#text-logo{
+    font-size: x-large;
+}
+
+#big-search{
+    max-width: 600px;
+}
+
+#no-card{
+    min-height: 300px;
+}
+
+#central_search_input {
+    border: 2px solid #a07e70;
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
+    font-size: 1.25rem;
+    background-color: #fff;
+    color: #5c5552;
+    box-shadow: 0 4px 10px rgba(140, 107, 93, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#central_search_input::placeholder {
+    color: #a07e70;
+    opacity: 0.75;
+}
+
+#central_search_input:focus {
+    outline: none;
+    border-color: #5D4037;
+    box-shadow: 0 0 0 4px rgba(160, 126, 112, 0.1), 0 4px 20px rgba(140, 107, 93, 0.3);
+    background-color: #fff;
+}
+
+

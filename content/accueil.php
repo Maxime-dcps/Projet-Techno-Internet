@@ -1,7 +1,7 @@
 <?php
 $order_by = isset($_GET['order_by']) ? $_GET['order_by'] : 'o.id_oeuvre';
 $order_direction = isset($_GET['tri_ordre']) ? $_GET['tri_ordre'] :'ASC';
-$search_term = isset($_GET['q']) ? trim($_GET['q']) : null;
+$search_term = isset($_GET['central_search']) ? trim($_GET['central_search']) : null;
 $filtre_type_id = (isset($_GET['filtre_type']) && $_GET['filtre_type'] !== '') ? (int)$_GET['filtre_type'] : null;
 
 if (isset($cnx)) {
@@ -26,8 +26,8 @@ if (isset($cnx)) {
             <div class="input-group input-group-lg w-75 mt-4" id="big-search">
                 <input
                         type="text"
-                        id="central_search_input"
-                        name="q"
+                        id="central_search"
+                        name="central_search"
                         class="form-control"
                         placeholder="Rechercher par titre, artiste ou description"
                         value="<?= htmlspecialchars($search_term ?? '') ?>"

@@ -192,11 +192,40 @@ class OeuvreDAO
             return false;
         }
 
-    } catch (PDOException $e) {
-        $this->_bd->rollBack();
-        print("Erreur PDO lors de la mise à jour de l'oeuvre (ID: {$id_oeuvre}): " . $e->getMessage());
+        } catch (PDOException $e) {
+            $this->_bd->rollBack();
+            print("Erreur PDO lors de la mise à jour de l'oeuvre (ID: {$id_oeuvre}): " . $e->getMessage());
 
-        return false;
+            return false;
+        }
     }
-}
+
+    public function getOeuvreSuggestions(string $term, int $limit = 5) {
+
+        $query = "SELECT DISTINCT titre FROM oeuvres WHERE UPPER(titre) LIKE UPPER(:term) LIMIT :limit";
+
+        try {
+            $stmt = $this->_bd->prepare($query);
+            $stmt->bindValue(':term', '%' . $term . '%', PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll();
+
+            foreach ($data as $row) {
+                $result[] = $row['titre'];
+            }
+
+            if($data){
+                return $result;
+            } else {
+                return [];
+            }
+
+        }
+        catch(PDOException $e) {
+            print "Erreur ".$e->getMessage();
+            return null;
+        }
+    }
 }

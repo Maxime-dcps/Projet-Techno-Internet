@@ -9,12 +9,10 @@ function debounce(func, delay) {
 function fetchFilteredOeuvres() {
     const data = {};
 
-    ['filtre_type', 'order_by', 'tri_ordre', 'central_search_input'].forEach(id => {
+    ['filtre_type', 'order_by', 'tri_ordre', 'central_search'].forEach(id => {
         const val = $(`#${id}`).val();
         if (val !== "") data[id] = val;
     });
-
-    console.log(data);
 
     $.ajax({
         url: "./admin/src/php/ajax/ajax_get_oeuvres.php",
@@ -26,7 +24,7 @@ function fetchFilteredOeuvres() {
 
             if (oeuvres.length === 0) {
                 html = `
-                    <div class="d-flex flex-column justify-content-center align-items-center w-100" style="min-height: 300px;">
+                    <div class="d-flex flex-column justify-content-center align-items-center w-100" id="no-card">
                         <p class="lead text-center">Aucune oeuvre ne correspond à vos critères de recherche actuels.</p>
                         <a href="./index_.php?page=accueil.php" class="btn btn-secondary mt-2">Réinitialiser les filtres</a>
                     </div>`;
@@ -52,13 +50,77 @@ function fetchFilteredOeuvres() {
                         </div>`;
                 });
             }
-
+            console.log("Avant update HTML");
             $('#liste-oeuvres').html(`<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-4">${html}</div>`);
+            console.log("Après update HTML");
         }
     });
 }
 
+// Déclarons une fonction debounce pour les événements d'autocomplétion
+// et une autre pour la recherche principale, ou réutilisons la même.
+// Pour la recherche principale, on veut qu'elle se déclenche une fois que l'utilisateur a *fini* de taper.
+const debouncedFetchFilteredOeuvres = debounce(fetchFilteredOeuvres, 400);
+
+
 $(document).ready(function () {
     $('#filtre_type, #order_by, #tri_ordre').on('change', fetchFilteredOeuvres);
-    $('#central_search_input').on('input', debounce(fetchFilteredOeuvres, 400));
+
+    $("#central_search").autocomplete({
+        source: function(request, response) {
+            const data = {};
+
+            data["searchTerm"] = request.term;
+
+            $.ajax({
+                url: "./admin/src/php/ajax/ajax_get_suggestions.php",
+                dataType: "json",
+                data: data,
+                success: function(data) {
+                    console.log("Réponse du serveur (suggestions) :", data);
+                    response(data);
+                },
+                error: function() {
+                    response([]);
+                }
+            });
+        },
+        minLength: 2,
+        delay: 200,
+        // Événement déclenché quand une suggestion est sélectionnée
+        select: function(event, ui) {
+            // 'ui.item.value' contient la valeur de la suggestion sélectionnée.
+            $(this).val(ui.item.value);
+            // Déclenche la recherche principale immédiatement après une sélection
+            fetchFilteredOeuvres();
+            return false; // Empêche le comportement par défaut de l'autocomplete (qui est de remplir l'input avec la suggestion et de faire un change)
+        },
+        // Événement déclenché quand l'autocomplete est fermé.
+        // C'est un bon endroit pour déclencher la recherche si l'utilisateur a tapé mais n'a rien sélectionné.
+        close: function(event, ui) {
+             // Vérifier si la valeur du champ a changé depuis la dernière sélection/recherche
+            debouncedFetchFilteredOeuvres();
+        },
+
+    });
+
+    $("#central_search").on("blur", function(e) {
+        // Optionnel: On peut utiliser une petite temporisation pour s'assurer que
+        // le "select" ou "close" de l'autocomplete a eu le temps de se déclencher.
+        // Sinon, le blur pourrait se déclencher avant le close/select.
+        setTimeout(() => {
+            if (!$(this).is(":focus") && $(this).val().length >= $(this).autocomplete("option", "minLength")) {
+                 debouncedFetchFilteredOeuvres();
+            }
+        }, 100); // Petite temporisation
+        console.log("Champ", e.type);
+    });
+
+    $("#central_search").on("focus", function(e) {
+        console.log("Champ", e.type);
+    });
+
+    $("#central_search").on("keydown", function() {
+        console.log("Touche tapée");
+    });
 });

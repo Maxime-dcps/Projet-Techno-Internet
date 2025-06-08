@@ -5,6 +5,7 @@ $ableToAlter = false;
 if (isset($cnx))
 {
     $oeuvreDAO = new OeuvreDAO($cnx);
+    $typeOeuvreDAO = new TypeOeuvreDAO($cnx);
 }
 
 if (isset($_GET['id'])) {
@@ -20,6 +21,8 @@ if (!$oeuvre)
     header('Location: ./index_.php?page=page_404.php');
     exit;
 }
+
+$typeOeuvre = $typeOeuvreDAO->getTypeOeuvreById($oeuvre->id_type_oeuvre);
 
 if(isset($_SESSION["utilisateur_id"]))
 {
@@ -45,6 +48,17 @@ if(isset($_SESSION["utilisateur_id"]))
 ?>
 
 <div class="container mt-4 mb-5">
+    <div class="row g-4">
+        <div class="container mt-5 mb-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./index_.php?page=accueil.php">Galerie</a></li>
+                    <li class="breadcrumb-item"><a href="./index_.php?page=accueil.php&filtre_type=<?= $oeuvre->id_type_oeuvre ?>"><?= $typeOeuvre->nom_type ?></a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= $oeuvre->titre ?></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
     <div class="row g-4">
         <div class="col-lg-7">
 

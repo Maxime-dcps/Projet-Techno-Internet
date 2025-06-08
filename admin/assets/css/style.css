@@ -215,8 +215,6 @@ hr {
     background-color: #fff;
 }
 
-/* --- STYLE AUTOCOMPLETE HARMONISÉ ET LARGEUR ADAPTÉE --- */
-
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;

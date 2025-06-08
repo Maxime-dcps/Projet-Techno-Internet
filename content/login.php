@@ -40,7 +40,7 @@ if(isset($_POST['login_submit']))
                 else header('Location: ./index_.php?page=accueil.php');
                 */
 
-                $page = isset($_POST["previous_page"]) ? basename($_POST['previous_page']) : "accueil.php";
+                $page = isset($_POST["previous_page"]) && $_POST["previous_page"] != "" ? basename($_POST['previous_page']) : "accueil.php";
 
                 header('Location: ./index_.php?page=' . $page);
 

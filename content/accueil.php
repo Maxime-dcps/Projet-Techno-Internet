@@ -22,19 +22,19 @@ if (isset($cnx)) {
         <p class="lead text-muted">Explorez notre collection et laissez-vous guider par votre curiosité.</p>
 
         <!-- Barre de recherche centrale -->
-        <div class="mt-4 mb-4 d-flex justify-content-center">
-            <div class="input-group input-group-lg w-75 mt-4" id="big-search">
-                <input
-                        type="text"
-                        id="central_search"
-                        name="central_search"
-                        class="form-control"
-                        placeholder="Rechercher par titre, artiste ou description"
-                        value="<?= htmlspecialchars($search_term ?? '') ?>"
-                        aria-label="Recherche d'oeuvres"
-                >
+            <div class="mt-4 mb-4 d-flex justify-content-center">
+                <div class="input-group input-group-lg w-75 mt-4" id="big-search">
+                    <input
+                            type="text"
+                            id="central_search"
+                            name="central_search"
+                            class="form-control"
+                            placeholder="Rechercher par titre, artiste ou description"
+                            value="<?= htmlspecialchars($search_term ?? '') ?>"
+                            aria-label="Recherche d'oeuvres"
+                    >
+                </div>
             </div>
-        </div>
     </div>
 
     <div class="container">

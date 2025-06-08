@@ -98,7 +98,7 @@ if (!isset($image_current_path)) {
                             <label for="image_oeuvre" class="form-label">Photographie</label>
                             <?php if ($is_update && !empty($image_current_path)): ?>
                                 <div class="mb-2">
-                                    <img src="<?= htmlspecialchars($image_current_path) ?>" alt="Image actuelle de l'oeuvre" style="max-width: 150px; height: auto; border: 1px solid #ddd; padding: 2px;">
+                                    <img class="actual-image" src="<?= htmlspecialchars($image_current_path) ?>" alt="Image actuelle de l'oeuvre">
                                     <small class="form-text text-muted d-block">Laissez vide pour conserver l'image actuelle.</small>
                                 </div>
                             <?php endif; ?>

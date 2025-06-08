@@ -259,3 +259,10 @@ hr {
 .ui-state-active span {
     color: #ffffff;
 }
+
+img.actual-image{
+    max-width: 150px;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 2px;"
+}

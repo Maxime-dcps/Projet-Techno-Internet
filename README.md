@@ -1,5 +1,9 @@
 # Art Gallery Management System
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/7f97861c-2cbf-4c9e-962c-b2a4fa789bce" alt="17c9b4a4ab8e20" />
+</div>
+
 This project is a web-based art gallery application, comprising a primary PHP platform and a complementary Python Flask interface, both interacting with a shared PostgreSQL database.
 
 ## Key Features
